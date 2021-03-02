@@ -1,0 +1,75 @@
+<h2 mat-dialog-title>Create your job listing</h2>
+<mat-dialog-content class="mat-typography">
+
+    
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Job Title</mat-label>
+            <input matInput placeholder="Enter a job title" [(ngModel)]="listingName">
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-hint>e.g. Software Engineer</mat-hint>
+        </mat-form-field>
+    </p>
+
+   
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Company</mat-label>
+            <input matInput placeholder="Enter the company name" [(ngModel)]="company">
+            <mat-icon matSuffix>work</mat-icon>
+            <mat-hint>e.g. Google</mat-hint>
+        </mat-form-field>
+    </p>
+
+
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Industry</mat-label>
+            <input matInput placeholder="Enter the industry" [(ngModel)]="industry">
+            <mat-icon matSuffix>work</mat-icon>
+            <mat-hint>e.g. Information Technology</mat-hint>
+        </mat-form-field>
+    </p>
+
+
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Employment Type</mat-label>
+            <mat-select [(value)]="employmentType">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let type of employmentTypes" [value]="type">{{type}}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix>settings_remote</mat-icon>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Salary</mat-label>
+            <input matInput placeholder="Enter salary" [(ngModel)]="salary" type="number">
+            <mat-icon matSuffix>attach_money</mat-icon>
+            <mat-hint>e.g. 75000</mat-hint>
+        </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput placeholder="Enter city" [(ngModel)]="city">
+            <mat-icon matSuffix>location_city</mat-icon>
+            <mat-hint>e.g. Atlanta</mat-hint>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <input matInput placeholder="Enter city" [(ngModel)]="city">
+            <mat-icon matSuffix>location_city</mat-icon>
+            <mat-hint>e.g. Atlanta</mat-hint>
+        </mat-form-field>
+    </p>
+    
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Submit</button>
+</mat-dialog-actions>

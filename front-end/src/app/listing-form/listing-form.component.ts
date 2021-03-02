@@ -1,6 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Listing } from '../listing';
-import { ListingsService } from '../listings.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-listing-form',
@@ -23,7 +21,7 @@ export class ListingFormComponent implements OnInit {
   startDate: Date | undefined = undefined;
   endDate: Date | undefined = undefined;
 
-  constructor(private service: ListingsService) {
+  constructor() {
 
   }
 

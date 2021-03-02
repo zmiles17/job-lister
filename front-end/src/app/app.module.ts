@@ -26,6 +26,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { CreateListingDialogComponent } from './create-listing-dialog/create-listing-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ListingViewComponent,
     SalarySliderComponent,
     TextInputComponent,
-    JobsTableComponent
+    JobsTableComponent,
+    CreateListingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,

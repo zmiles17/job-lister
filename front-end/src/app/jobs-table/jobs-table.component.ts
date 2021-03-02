@@ -17,15 +17,12 @@ export class JobsTableComponent implements OnInit, AfterViewInit {
     "salary", "date posted"]
   errorMessage: string = "";
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private service: ListingsService) {
       service.getListings().subscribe(
         listings => this.dataSource = new MatTableDataSource(listings)
-
       )
    }
 
