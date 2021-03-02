@@ -1,2 +1,9 @@
-<mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="1" max="100000"></mat-slider>
-<mat-icon>attach_money</mat-icon>
+<p>
+    <mat-slider thumbLabel 
+    [displayWith]="formatLabel" 
+    tickInterval="1000" 
+    min="1" 
+    max="200000"
+    [(ngModel)]="salary"></mat-slider>
+    <mat-icon>attach_money</mat-icon>
+</p>

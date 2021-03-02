@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalarySliderComponent implements OnInit {
 
+  salary: number = 0;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -17,6 +17,15 @@ import { ListingComponent } from './listing/listing.component';
 import { ListingViewComponent } from './listing-view/listing-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SalarySliderComponent } from './salary-slider/salary-slider.component';
+import { TextInputComponent } from './text-input/text-input.component';
+import { ListingsService } from './listings.service';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { JobsTableComponent } from './jobs-table/jobs-table.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -27,20 +36,29 @@ import { SalarySliderComponent } from './salary-slider/salary-slider.component';
     NavbarComponent,
     ListingComponent,
     ListingViewComponent,
-    SalarySliderComponent
+    SalarySliderComponent,
+    TextInputComponent,
+    JobsTableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     MatButtonModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatSelectModule,
     MatSliderModule,
+    MatTableModule,
     MatToolbarModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ListingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

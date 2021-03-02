@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Listing } from '../listing';
+import { ListingsService } from '../listings.service';
 
 @Component({
   selector: 'app-homepage',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  listings: Listing[] = [];
+  errorMessage: string = "";
+
+  constructor(private service: ListingsService) { }
 
   ngOnInit(): void {
   }
