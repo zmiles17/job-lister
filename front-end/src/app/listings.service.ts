@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
@@ -31,6 +31,10 @@ export class ListingsService {
 
   addListing(listing: Listing): Observable<Listing> {
     return this.http.post<Listing>(this.baseUrl, listing, this.headers);
+  }
+
+  deleteListing(id: number): Observable<HttpResponse<string>> {
+    return this.http.delete<HttpResponse<string>>(this.baseUrl + `/${id}`, this.headers);
   }
 
   private handleError(err: any): Observable<never> {

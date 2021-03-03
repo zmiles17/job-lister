@@ -1,12 +1,28 @@
 table {
-    width: 100%;
+    width: 100vw;
   }
   
   .mat-form-field {
     font-size: 14px;
-    width: 100%;
+  }
+
+  .filterContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .mat-paginator {
+    width: 100vw;
   }
   
   td, th {
-    width: 10%;
+    width: 15%;
+  }
+
+  @media only screen and (max-width: 750px) {
+    .mat-cell {
+      font-size: 10px;
+    }
   }

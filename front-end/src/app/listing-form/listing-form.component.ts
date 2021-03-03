@@ -7,7 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class ListingFormComponent implements OnInit {
 
-  jobTitle: string = "";
+  jobTitle: string;
   states: string[] = [
     'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
     'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
@@ -17,9 +17,9 @@ export class ListingFormComponent implements OnInit {
     'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
   ];
-  selectedState: string = "";
-  startDate: Date | undefined = undefined;
-  endDate: Date | undefined = undefined;
+  selectedState: string;
+  startDate: Date;
+  endDate: Date;
 
   constructor() {
 
@@ -29,7 +29,9 @@ export class ListingFormComponent implements OnInit {
   }
 
   search() {
-    
+    if (this.jobTitle) {
+      console.log(this.jobTitle);
+    }
   }
 
 

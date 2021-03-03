@@ -19,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SalarySliderComponent } from './salary-slider/salary-slider.component';
 import { TextInputComponent } from './text-input/text-input.component';
 import { ListingsService } from './listings.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { JobsTableComponent } from './jobs-table/jobs-table.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -28,6 +28,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CreateListingDialogComponent } from './create-listing-dialog/create-listing-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -54,12 +56,15 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
     MatPaginatorModule,
     MatFormFieldModule,
+    MatMenuModule,
     MatInputModule,
     MatIconModule,
     MatSelectModule,
+    MatSortModule,
     MatSliderModule,
     MatTableModule,
     MatToolbarModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [ListingsService],

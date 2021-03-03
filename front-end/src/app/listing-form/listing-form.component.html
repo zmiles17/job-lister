@@ -1,14 +1,16 @@
 <div class="wrapper">
     <h1 class="mat-display-1"></h1> <!-- Empty h1 for spacing -->
 
-    <mat-form-field appearance="outline">
-        <mat-label>Job Title</mat-label>
-        <input matInput placeholder="Enter a job title" [(ngModel)]="jobTitle">
-        <mat-icon matSuffix>person</mat-icon>
-        <mat-hint>e.g. Software Engineer</mat-hint>
-    </mat-form-field>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Job Title</mat-label>
+            <input matInput placeholder="Enter a job title" [(ngModel)]="jobTitle">
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-hint>e.g. Software Engineer</mat-hint>
+        </mat-form-field>
+    </p>
 
-    <mat-form-field appearance="outline">
+    <!-- <mat-form-field appearance="outline">
         <mat-label>State</mat-label>
         <mat-select [(value)]="selectedState">
             <mat-option>None</mat-option>
@@ -26,7 +28,7 @@
         <mat-date-range-picker #picker touchUi disabled="false"></mat-date-range-picker>
       </mat-form-field>
 
-    <app-salary-slider></app-salary-slider>
+    <app-salary-slider></app-salary-slider> -->
     <button mat-raised-button color="primary" (click)="search()">Search</button>
     <h1 class="mat-display-1"></h1> <!-- Empty h1 for spacing -->
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Listing } from '../listing';
 import { ListingsService } from '../listings.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,25 +10,24 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './jobs-table.component.html',
   styleUrls: ['./jobs-table.component.css']
 })
-export class JobsTableComponent implements OnInit, AfterViewInit {
+export class JobsTableComponent implements OnInit {
 
-  dataSource!: MatTableDataSource<Listing>;
+  dataSource: MatTableDataSource<Listing>;
   displayedColumns: string[] = ["name", "company", "industry", "location", "type",
-    "salary", "date posted"]
-  errorMessage: string = "";
+    "salary", "date posted", "star"]
+  errorMessage: string;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private service: ListingsService) {
-      service.getListings().subscribe(
-        listings => this.dataSource = new MatTableDataSource(listings)
-      )
-   }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    service.getListings().subscribe(
+      listings => {
+        this.dataSource = new MatTableDataSource(listings)
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    )
   }
 
   applyFilter(event: Event) {
@@ -38,6 +37,16 @@ export class JobsTableComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  deleteListing(listing: Listing) {
+    const rowIndex = this.dataSource.data.indexOf(listing);
+    this.service.deleteListing(listing.listingId).subscribe(
+      () => {
+        this.dataSource.data.splice(rowIndex, 1)
+        this.dataSource._updateChangeSubscription()
+      }
+    );
   }
 
   ngOnInit(): void {
