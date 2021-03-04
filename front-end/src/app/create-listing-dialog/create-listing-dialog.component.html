@@ -1,7 +1,6 @@
 <h2 mat-dialog-title>Create your job listing</h2>
 <mat-dialog-content class="mat-typography">
 
-
     <p>
         <mat-form-field appearance="outline">
             <mat-label>Job Title</mat-label>
@@ -21,7 +20,7 @@
             <mat-label>Company</mat-label>
             <input matInput placeholder="Enter the company name" [(ngModel)]="company" [formControl]="textFormControl"
                 required>
-            <mat-icon matSuffix>work</mat-icon>
+            <mat-icon matSuffix>business_center</mat-icon>
             <!-- <mat-hint>e.g. Google</mat-hint> -->
             <mat-error *ngIf="textFormControl.hasError('required')">
                 Company is <strong>required</strong>
@@ -91,15 +90,19 @@
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
             </mat-select>
-            <mat-icon matSuffix>location_city</mat-icon>
+            <mat-icon matSuffix>location_on</mat-icon>
             <mat-error *ngIf="textFormControl.hasError('required')">
                 State is <strong>required</strong>
             </mat-error>
         </mat-form-field>
     </p>
+    <!-- <app-question *ngFor="let q of [].constructor(questionCount); let i = index;"></app-question>
+    <button (click)="addQuestion()">Add Question</button> -->
+    
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="createListingRequest()">Submit</button>
+    <button mat-stroked-button [mat-dialog-close]="true" color="primary" (click)="createListingRequest()" 
+    [disabled]="textFormControl.hasError('required') || numberFormControl.hasError('required')">Submit</button>
 </mat-dialog-actions>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateListingDialogComponent } from '../create-listing-dialog/create-listing-dialog.component';
+import { Listing } from '../listing';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,8 @@ import { CreateListingDialogComponent } from '../create-listing-dialog/create-li
 })
 export class NavbarComponent implements OnInit {
 
+  @Output() listingAddedEventEmitter: EventEmitter<Listing> = new EventEmitter<Listing>();
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -16,9 +19,12 @@ export class NavbarComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(CreateListingDialogComponent);
+    const subscribeDialog = dialogRef.componentInstance.listingAddedEvent.subscribe((data) => {
+      this.listingAddedEventEmitter.emit(data);
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      subscribeDialog.unsubscribe();
     });
   }
 }

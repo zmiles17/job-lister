@@ -30,6 +30,8 @@ import { CreateListingDialogComponent } from './create-listing-dialog/create-lis
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
 import {MatMenuModule} from '@angular/material/menu';
+import { QuestionComponent } from './question/question.component';
+import { UpdateListingDialogComponent } from './update-listing-dialog/update-listing-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import {MatMenuModule} from '@angular/material/menu';
     SalarySliderComponent,
     TextInputComponent,
     JobsTableComponent,
-    CreateListingDialogComponent
+    CreateListingDialogComponent,
+    QuestionComponent,
+    UpdateListingDialogComponent
   ],
   imports: [
     BrowserModule,

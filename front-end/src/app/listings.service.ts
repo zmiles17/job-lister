@@ -33,8 +33,12 @@ export class ListingsService {
     return this.http.post<Listing>(this.baseUrl, listing, this.headers);
   }
 
-  deleteListing(id: number): Observable<HttpResponse<string>> {
-    return this.http.delete<HttpResponse<string>>(this.baseUrl + `/${id}`, this.headers);
+  updateListing(listing: Listing): Observable<Listing> {
+    return this.http.put<Listing>(this.baseUrl, listing, this.headers);
+  }
+
+  deleteListing(id: number): Observable<HttpResponse<object>> {
+    return this.http.delete<HttpResponse<object>>(this.baseUrl + `/${id}`, this.headers);
   }
 
   private handleError(err: any): Observable<never> {

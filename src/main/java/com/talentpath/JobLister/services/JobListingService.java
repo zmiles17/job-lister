@@ -69,11 +69,11 @@ public class JobListingService {
         return listingDao.findBySalaryBetween(low, high);
     }
 
-    public Listing updateListing(Integer listingId, Listing listing)
+    public Listing updateListing(Listing listing)
             throws ResourceNotFoundException, DataIntegrityViolationException {
         Listing currentListing = listingDao
-                .findById(listingId)
-                .orElseThrow(() -> new ResourceNotFoundException("Listing not found with listingId = " + listingId));
+                .findById(listing.getListingId())
+                .orElseThrow(() -> new ResourceNotFoundException("Listing not found with listingId = " + listing.getListingId()));
         currentListing.setListingName(listing.getListingName());
         currentListing.setCity(listing.getCity());
         currentListing.setCompany(listing.getCompany());
@@ -81,7 +81,6 @@ public class JobListingService {
         currentListing.setEmploymentType(listing.getEmploymentType());
         currentListing.setState(listing.getState());
         currentListing.setSalary(listing.getSalary());
-        currentListing.setDatePosted(Instant.now());
         return listingDao.save(currentListing);
     }
 

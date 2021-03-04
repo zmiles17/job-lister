@@ -3,6 +3,7 @@ package com.talentpath.JobLister.controllers;
 import com.talentpath.JobLister.exceptions.ResourceNotFoundException;
 import com.talentpath.JobLister.models.Listing;
 import com.talentpath.JobLister.services.JobListingService;
+import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class ListingController {
 
     @PostMapping
     public ResponseEntity<Listing> saveListing(@RequestBody Listing listing)
-            throws DataIntegrityViolationException {
+            throws DataIntegrityViolationException, PropertyValueException {
             return new ResponseEntity<>(jobListingService.saveListing(listing),
                     HttpStatus.CREATED);
     }
@@ -111,12 +112,21 @@ public class ListingController {
                         + daysAgo + " days")), HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Listing>> getListingsByMultipleSearchCriteria(
+            @RequestParam("name") String name, @RequestParam("company") String company,
+            @RequestParam("industry") String industry, @RequestParam("city") String city,
+            @RequestParam("state") String state, @RequestParam("type") String type,
+            @RequestParam("salary") Integer salary, @RequestParam("daysAgo") Integer days
+    ) {
+        throw new UnsupportedOperationException();
+    }
+
     @PutMapping("/{listingId}")
-    public ResponseEntity<Listing> updateListing(@PathVariable Integer listingId,
-                                                 @RequestBody Listing listing)
+    public ResponseEntity<Listing> updateListing(@RequestBody Listing listing)
             throws DataIntegrityViolationException, ResourceNotFoundException {
             return new ResponseEntity<>(jobListingService
-                    .updateListing(listingId, listing), HttpStatus.ACCEPTED);
+                    .updateListing(listing), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{listingId}")
