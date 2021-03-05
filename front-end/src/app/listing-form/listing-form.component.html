@@ -2,6 +2,15 @@
     <h1 class="mat-display-1"></h1> <!-- Empty h1 for spacing -->
 
     <p>
+        <mat-form-field>
+            <mat-label>Select search criteria</mat-label>
+            <mat-select [(value)]="searchBy">
+                <mat-option *ngFor="let option of searchOptions" [value]="option">{{option}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+
+    <p *ngIf="searchBy === 'Job Title'">
         <mat-form-field appearance="outline">
             <mat-label>Job Title</mat-label>
             <input matInput placeholder="Enter a job title" [(ngModel)]="jobTitle">
@@ -10,25 +19,72 @@
         </mat-form-field>
     </p>
 
-    <!-- <mat-form-field appearance="outline">
-        <mat-label>State</mat-label>
-        <mat-select [(value)]="selectedState">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-        </mat-select>
-    </mat-form-field>
+    <p *ngIf="searchBy === 'Company'">
+        <mat-form-field appearance="outline">
+            <mat-label>Company</mat-label>
+            <input matInput placeholder="Enter company name" [(ngModel)]="company">
+            <mat-icon matSuffix>business_center</mat-icon>
+            <mat-hint>e.g. Google</mat-hint>
+        </mat-form-field>
+    </p>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate placeholder="Start date" disabled [(ngModel)]="startDate">
-          <input matEndDate placeholder="End date" disabled [(ngModel)]="endDate">
-        </mat-date-range-input>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker touchUi disabled="false"></mat-date-range-picker>
-      </mat-form-field>
+    <p *ngIf="searchBy === 'Industry'">
+        <mat-form-field appearance="outline">
+            <mat-label>Industry</mat-label>
+            <input matInput placeholder="Enter industry name" [(ngModel)]="industry">
+            <mat-icon matSuffix>work</mat-icon>
+            <mat-hint>e.g. Information Technology</mat-hint>
+        </mat-form-field>
+    </p>
 
-    <app-salary-slider></app-salary-slider> -->
+    <p *ngIf="searchBy === 'Location'">
+        <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput placeholder="Enter city name" [(ngModel)]="city">
+            <mat-icon matSuffix>location_city</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <mat-select [(value)]="selectedState">
+                <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+
+    <p *ngIf="searchBy === 'Employment Type'">
+        <mat-form-field appearance="outline">
+            <mat-label>Employment Type</mat-label>
+            <mat-select [(value)]="employmentType">
+                <mat-option *ngFor="let type of employmentTypes" [value]="type">{{type}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+
+    <p *ngIf="searchBy === 'Date Posted'">
+        <mat-form-field appearance="outline" class="example-form-field">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="datepicker" [max]="today" [(ngModel)]="dateSelected">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker touchUi>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+            <mat-hint>Select the date and we'll find all jobs posted within that timeframe.</mat-hint>
+          </mat-form-field>
+    </p>
+
+    <p *ngIf="searchBy === 'Salary'">
+        <mat-slider thumbLabel 
+        [displayWith]="formatLabel" 
+        tickInterval="1000" 
+        min="0" 
+        max="500000"
+        [(ngModel)]="salary"></mat-slider>
+        <mat-icon>attach_money</mat-icon>
+    </p>
+
     <button mat-raised-button color="primary" (click)="search()">Search</button>
     <h1 class="mat-display-1"></h1> <!-- Empty h1 for spacing -->
 </div>

@@ -141,7 +141,7 @@ public class ListingDaoTests {
 
         Listing savedListing = listingDao.save(listing);
 
-        List<Listing> jobList = listingDao.findByIndustryIgnoreCase("environmental science").get();
+        List<Listing> jobList = listingDao.findByIndustryContainingIgnoreCase("environmental science").get();
 
         assertEquals(savedListing, jobList.get(0));
     }

@@ -32,6 +32,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatMenuModule} from '@angular/material/menu';
 import { QuestionComponent } from './question/question.component';
 import { UpdateListingDialogComponent } from './update-listing-dialog/update-listing-dialog.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { UpdateListingDialogComponent } from './update-listing-dialog/update-lis
     JobsTableComponent,
     CreateListingDialogComponent,
     QuestionComponent,
-    UpdateListingDialogComponent
+    UpdateListingDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

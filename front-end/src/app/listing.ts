@@ -2,7 +2,6 @@ import { Applicant } from "./applicant";
 import { Question } from "./question";
 
 export class Listing {
-    [index: string]: any;
     listingId?: number;
     listingName: string;
     company: string;

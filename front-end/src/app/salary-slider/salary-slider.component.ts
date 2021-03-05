@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-salary-slider',
@@ -9,17 +9,17 @@ export class SalarySliderComponent implements OnInit {
 
   salary: number;
 
+  @Output() salaryChanged: EventEmitter<number> = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  formatLabel(value: number) {
-    if (value >= 1000) {
-      return Math.round(value / 1000) + 'k';
-    }
+  
 
-    return value;
+  updateSalary() {
+    this.salaryChanged.emit(this.salary);
   }
 
 }

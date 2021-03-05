@@ -1,7 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
 import { Listing } from './listing';
 
 @Injectable({
@@ -22,11 +21,31 @@ export class ListingsService {
   }
 
   getListingsByJobTitle(title: string): Observable<Listing[]> {
-    return this.http.get<Listing[]>(this.baseUrl + `/job/${title}`, this.headers)
-      .pipe(
-        tap(data => console.log(data)),
-        catchError(this.handleError)
-      );
+    return this.http.get<Listing[]>(this.baseUrl + `/job/${title}`, this.headers);
+  }
+
+  getListingsByIndustry(industry: string): Observable<Listing[]> {
+    return this.http.get<Listing[]>(this.baseUrl + `/industry/${industry}`, this.headers);
+  }
+
+  getListingsByCompany(company: string): Observable<Listing[]> {
+    return this.http.get<Listing[]>(this.baseUrl + `/company/${company}`, this.headers);
+  }
+
+  getlistingsByEmploymentType(type: string): Observable<Listing[]> {
+    return this.http.get<Listing[]>(this.baseUrl + `/employment/${type}`, this.headers);
+  }
+
+  getListingsBySalaryRange(low: number, high: number): Observable<Listing[]> {
+    return this.http.get<Listing[]>(this.baseUrl + `/salary/${low}/${high}`, this.headers);
+  }
+
+  getListingsByLocation(city: string, state: string): Observable<Listing[]> {
+    return this.http.get<Listing[]>(this.baseUrl + `/${city}/${state}`, this.headers);
+  }
+
+  getListingsByDaysAgo(daysAgo: number): Observable<Listing[]> {
+    return this.http.get<Listing[]>(this.baseUrl + `/datePosted/${daysAgo}`, this.headers);
   }
 
   addListing(listing: Listing): Observable<Listing> {

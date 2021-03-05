@@ -19,7 +19,7 @@ public interface ListingDao extends JpaRepository<Listing, Integer> {
 
     Optional<List<Listing>> findByEmploymentTypeIgnoreCase(String type);
 
-    Optional<List<Listing>> findByIndustryIgnoreCase(String industry);
+    Optional<List<Listing>> findByIndustryContainingIgnoreCase(String industry);
 
     Optional<List<Listing>> findByCompanyContainingIgnoreCase(String company);
 

@@ -122,7 +122,7 @@ public class ListingController {
         throw new UnsupportedOperationException();
     }
 
-    @PutMapping("/{listingId}")
+    @PutMapping
     public ResponseEntity<Listing> updateListing(@RequestBody Listing listing)
             throws DataIntegrityViolationException, ResourceNotFoundException {
             return new ResponseEntity<>(jobListingService

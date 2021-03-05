@@ -1,3 +1,3 @@
 <app-navbar (listingAddedEventEmitter)="listingAdded($event)"></app-navbar>
-<app-listing-form></app-listing-form>
-<app-jobs-table [listingToAdd]="listingToAdd"></app-jobs-table>
+<app-listing-form (searchListingsEventEmitter)="searchListings($event)"></app-listing-form>
+<app-jobs-table [listingToAdd]="listingToAdd" [listings]="listings"></app-jobs-table>

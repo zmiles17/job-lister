@@ -1,108 +1,103 @@
-<h2 mat-dialog-title>Create your job listing</h2>
-<mat-dialog-content class="mat-typography">
-
-    <p>
-        <mat-form-field appearance="outline">
-            <mat-label>Job Title</mat-label>
-            <input matInput placeholder="Enter a job title" [(ngModel)]="listingName" [formControl]="textFormControl"
-                required>
-            <mat-icon matSuffix>person</mat-icon>
-            <!-- <mat-hint>e.g. Software Engineer</mat-hint> -->
-            <mat-error *ngIf="textFormControl.hasError('required')">
-                Job title is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-    </p>
+<form [formGroup]="form">
+    <h2 mat-dialog-title>Create your job listing</h2>
+    <mat-dialog-content class="mat-typography">
 
 
-    <p>
-        <mat-form-field appearance="outline">
-            <mat-label>Company</mat-label>
-            <input matInput placeholder="Enter the company name" [(ngModel)]="company" [formControl]="textFormControl"
-                required>
-            <mat-icon matSuffix>business_center</mat-icon>
-            <!-- <mat-hint>e.g. Google</mat-hint> -->
-            <mat-error *ngIf="textFormControl.hasError('required')">
-                Company is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-    </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Job Title</mat-label>
+                <input matInput placeholder="Enter a job title" formControlName="listingName" required>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error *ngIf="form.controls['listingName'].hasError('required')">
+                    Job title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
 
 
-    <p>
-        <mat-form-field appearance="outline">
-            <mat-label>Industry</mat-label>
-            <input matInput placeholder="Enter the industry" [(ngModel)]="industry" [formControl]="textFormControl"
-                required>
-            <mat-icon matSuffix>work</mat-icon>
-            <!-- <mat-hint>e.g. Information Technology</mat-hint> -->
-            <mat-error *ngIf="textFormControl.hasError('required')">
-                Industry is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-    </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Company</mat-label>
+                <input matInput placeholder="Enter the company name" formControlName="company" required>
+                <mat-icon matSuffix>business_center</mat-icon>
+                <mat-error *ngIf="form.controls['company'].hasError('required')">
+                    Company is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
 
 
-    <p>
-        <mat-form-field appearance="outline">
-            <mat-label>Employment Type</mat-label>
-            <mat-select [(value)]="employmentType" [formControl]="textFormControl" required>
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let type of employmentTypes" [value]="type">{{type}}</mat-option>
-            </mat-select>
-            <mat-icon matSuffix>settings_remote</mat-icon>
-            <mat-error *ngIf="textFormControl.hasError('required')">
-                Employment type is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-    </p>
-    <p>
-        <mat-form-field appearance="outline">
-            <mat-label>Salary</mat-label>
-            <input matInput placeholder="Enter salary" [(ngModel)]="salary" type="number"
-                [formControl]="numberFormControl" required>
-            <mat-icon matSuffix>attach_money</mat-icon>
-            <!-- <mat-hint>e.g. 75000</mat-hint> -->
-            <mat-error *ngIf="numberFormControl.hasError('min')">
-                Salary should be greater than or equal to <strong>0</strong>
-            </mat-error>
-            <mat-error *ngIf="numberFormControl.hasError('required')">
-                Salary is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-    </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Industry</mat-label>
+                <input matInput placeholder="Enter the industry" formControlName="industry" required>
+                <mat-icon matSuffix>work</mat-icon>
+                <mat-error *ngIf="form.controls['industry'].hasError('required')">
+                    Industry is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
 
-    <p>
-        <mat-form-field appearance="outline">
-            <mat-label>City</mat-label>
-            <input matInput placeholder="Enter city" [(ngModel)]="city" [formControl]="textFormControl" required>
-            <mat-icon matSuffix>location_city</mat-icon>
-            <!-- <mat-hint>e.g. Atlanta</mat-hint> -->
-            <mat-error *ngIf="textFormControl.hasError('required')">
-                City is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-    </p>
-    <p>
-        <mat-form-field appearance="outline">
-            <mat-label>State</mat-label>
-            <mat-select [(value)]="selectedState" [formControl]="textFormControl" required>
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-            </mat-select>
-            <mat-icon matSuffix>location_on</mat-icon>
-            <mat-error *ngIf="textFormControl.hasError('required')">
-                State is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-    </p>
-    <!-- <app-question *ngFor="let q of [].constructor(questionCount); let i = index;"></app-question>
+
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Employment Type</mat-label>
+                <mat-select formControlName="employmentType" required>
+                    <mat-option *ngFor="let type of employmentTypes" [value]="type">{{type}}</mat-option>
+                </mat-select>
+                <mat-icon matSuffix>settings_remote</mat-icon>
+                <mat-error *ngIf="form.controls['employmentType'].hasError('required')">
+                    Employment type is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Salary</mat-label>
+                <input matInput placeholder="Enter salary" type="number" formControlName="salary" required>
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-error *ngIf="form.controls['salary'].hasError('max')">
+                    Salary should be less than or equal to <strong>$500,000</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls['salary'].hasError('min')">
+                    Salary should be greater than or equal to <strong>0</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls['salary'].hasError('required')">
+                    Salary is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <input matInput placeholder="Enter city" formControlName="city" required>
+                <mat-icon matSuffix>location_city</mat-icon>
+                <mat-error *ngIf="form.controls['city'].hasError('required')">
+                    City is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>State</mat-label>
+                <mat-select formControlName="state" required>
+                    <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+                <mat-icon matSuffix>location_on</mat-icon>
+                <mat-error *ngIf="form.controls['state'].hasError('required')">
+                    State is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <!-- <app-question *ngFor="let q of [].constructor(questionCount); let i = index;"></app-question>
     <button (click)="addQuestion()">Add Question</button> -->
-    
 
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-stroked-button [mat-dialog-close]="true" color="primary" (click)="createListingRequest()" 
-    [disabled]="textFormControl.hasError('required') || numberFormControl.hasError('required')">Submit</button>
-</mat-dialog-actions>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [disabled]="form.status === 'INVALID'" [mat-dialog-close]="form.value"
+            color="primary">Submit</button>
+    </mat-dialog-actions>
+</form>

@@ -58,7 +58,7 @@ public class JobListingService {
     }
 
     public Optional<List<Listing>> getListingsByIndustry(String industry) {
-        return listingDao.findByIndustryIgnoreCase(industry);
+        return listingDao.findByIndustryContainingIgnoreCase(industry);
     }
 
     public Optional<List<Listing>> getListingsByCompany(String company) {

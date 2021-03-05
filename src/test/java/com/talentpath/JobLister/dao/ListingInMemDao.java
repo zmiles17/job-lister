@@ -37,7 +37,7 @@ public class ListingInMemDao implements ListingDao {
     }
 
     @Override
-    public Optional<List<Listing>> findByIndustryIgnoreCase(String industry) {
+    public Optional<List<Listing>> findByIndustryContainingIgnoreCase(String industry) {
         return Optional.empty();
     }
 

@@ -9,6 +9,7 @@ import { Listing } from '../listing';
 export class HomepageComponent implements OnInit {
 
   listingToAdd: Listing;
+  listings: Listing[];
 
   constructor() {
   }
@@ -18,6 +19,10 @@ export class HomepageComponent implements OnInit {
 
   listingAdded(listing: Listing) {
     this.listingToAdd = listing;
+  }
+
+  searchListings(listings: Listing[]) {
+    this.listings = listings;
   }
 
 }

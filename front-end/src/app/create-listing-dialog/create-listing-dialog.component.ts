@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Listing } from '../listing';
-import { ListingsService } from '../listings.service';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AppConstants } from '../constants';
 
 @Component({
   selector: 'app-create-listing-dialog',
@@ -17,45 +16,24 @@ export class CreateListingDialogComponent implements OnInit {
   salary: number;
   city: string;
   selectedState: string;
-  employmentTypes: string[] = ["Part-Time", "Full-Time", "Contract", "Temporary", "Remote"]
-  states: string[] = [
-    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
-    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-  ];
+  employmentTypes: string[] = AppConstants.employmentTypes;
+  states: string[] = AppConstants.states;
   questionCount: number = 0;
 
-  @Output() listingAddedEvent: EventEmitter<Listing> = new EventEmitter<Listing>();
+  form: FormGroup = new FormGroup({
+    listingName: new FormControl('', Validators.required),
+    industry: new FormControl('', Validators.required),
+    company: new FormControl('', Validators.required),
+    salary: new FormControl('', [Validators.required, Validators.min(0), Validators.max(500000)]),
+    state: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    employmentType: new FormControl('', Validators.required)
+  });
 
-  numberFormControl = new FormControl(0, [
-    Validators.min(0),
-    Validators.required
-  ]);
-
-  textFormControl = new FormControl('', [
-    Validators.required,
-  ]);
-
-  constructor(private service: ListingsService) {
-      
+  constructor() {  
   }
 
   ngOnInit(): void {
-    
-  }
-
-  
-
-  createListingRequest() {
-    this.service.addListing(new Listing(
-      this.listingName, this.company, this.salary, this.industry, this.employmentType, this.city, this.selectedState)
-    ).subscribe(
-      listing => this.listingAddedEvent.emit(listing)
-    )
   }
 
   addQuestion() {
