@@ -7,6 +7,7 @@ import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class ListingController {
     @Autowired
     private JobListingService jobListingService;
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Listing> saveListing(@RequestBody Listing listing)
             throws DataIntegrityViolationException, PropertyValueException {
             return new ResponseEntity<>(jobListingService.saveListing(listing),

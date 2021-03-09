@@ -1,5 +1,8 @@
-export interface Question {
+export class Question {
     questionId?: number;
     question: string;
-    required: boolean;
+
+    constructor(question: string) {
+        this.question = question;
+    } 
 }

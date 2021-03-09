@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppConstants } from '../constants';
+import { Question } from '../question';
 
 @Component({
   selector: 'app-create-listing-dialog',
@@ -9,16 +10,8 @@ import { AppConstants } from '../constants';
 })
 export class CreateListingDialogComponent implements OnInit {
 
-  listingName: string;
-  company: string;
-  industry: string;
-  employmentType: string;
-  salary: number;
-  city: string;
-  selectedState: string;
   employmentTypes: string[] = AppConstants.employmentTypes;
   states: string[] = AppConstants.states;
-  questionCount: number = 0;
 
   form: FormGroup = new FormGroup({
     listingName: new FormControl('', Validators.required),
@@ -27,17 +20,23 @@ export class CreateListingDialogComponent implements OnInit {
     salary: new FormControl('', [Validators.required, Validators.min(0), Validators.max(500000)]),
     state: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
-    employmentType: new FormControl('', Validators.required)
+    employmentType: new FormControl('', Validators.required),
+    questions: new FormArray([])
   });
 
-  constructor() {  
+  get questions() {
+    return this.form.get('questions') as FormArray;
+  }
+
+  constructor() { 
+     
   }
 
   ngOnInit(): void {
   }
 
   addQuestion() {
-    this.questionCount++;
+    this.questions.push(new FormControl('', Validators.nullValidator));
   }
 
 }

@@ -1,12 +1,15 @@
 package com.talentpath.JobLister.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @AllArgsConstructor
@@ -19,16 +22,16 @@ import java.io.Serializable;
 public class Answer implements Serializable {
 
     @EmbeddedId
-    private ApplicantAnswerKey id;
+    private ApplicantAnswerKey id = new ApplicantAnswerKey();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @MapsId("applicantId")
-    @JoinColumn(name = "applicant_id")
+    @JoinColumn(name = "fk_applicant_id", referencedColumnName = "applicant_id")
     private Applicant applicant;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @MapsId("questionId")
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "fk_question_id", referencedColumnName = "question_id")
     private Question question;
 
     private String answer;

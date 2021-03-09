@@ -20,6 +20,10 @@ export class ListingsService {
     return this.http.get<Listing[]>(this.baseUrl, this.headers);
   }
 
+  getListingById(listingId: number): Observable<Listing> {
+    return this.http.get<Listing>(this.baseUrl + `/${listingId}`, this.headers);
+  }
+
   getListingsByJobTitle(title: string): Observable<Listing[]> {
     return this.http.get<Listing[]>(this.baseUrl + `/job/${title}`, this.headers);
   }

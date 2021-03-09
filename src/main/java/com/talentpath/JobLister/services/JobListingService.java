@@ -1,10 +1,7 @@
 package com.talentpath.JobLister.services;
 
 import com.talentpath.JobLister.exceptions.ResourceNotFoundException;
-import com.talentpath.JobLister.models.Answer;
-import com.talentpath.JobLister.models.Applicant;
-import com.talentpath.JobLister.models.Listing;
-import com.talentpath.JobLister.models.Question;
+import com.talentpath.JobLister.models.*;
 import com.talentpath.JobLister.persistence.AnswerDao;
 import com.talentpath.JobLister.persistence.ApplicantDao;
 import com.talentpath.JobLister.persistence.ListingDao;
@@ -12,11 +9,13 @@ import com.talentpath.JobLister.persistence.QuestionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class JobListingService {
@@ -105,7 +104,6 @@ public class JobListingService {
     public Question updateQuestion(Integer questionId, Question question) {
         Question currQuestion = questionDao.findById(questionId).orElseThrow();
         currQuestion.setQuestion(question.getQuestion());
-        currQuestion.setRequired(question.getRequired());
         return questionDao.save(currQuestion);
     }
 
@@ -113,13 +111,23 @@ public class JobListingService {
         questionDao.deleteById(questionId);
     }
 
+    @Transactional
     public List<Answer> saveAnswers(Integer listingId, List<Answer> answers) {
-        //TODO: Once an applicant has answered all required questions, then there must be an entry made to
-        // applications with applicantId and listingId
-        Listing listingToUpdate = getListingById(listingId).orElseThrow();
+        Listing listing = getListingById(listingId).orElseThrow();
         Applicant applicant = answers.get(0).getApplicant();
-        applicant.getListings().add(listingToUpdate);
-        applicantDao.save(applicant);
+        applicant.getListings().add(listing);
+        final Applicant applicantFromDb = applicantDao.findByApplicantNameAndPhoneNumberAndEmail(
+                applicant.getApplicantName(), applicant.getPhoneNumber(), applicant.getEmail()
+        ).orElse(applicantDao.save(applicant));
+
+
+
+        for (Answer ans : answers) {
+            ans.setApplicant(applicantFromDb);
+            ans.getId().setApplicantId(applicantFromDb.getApplicantId());
+            ans.getId().setQuestionId(ans.getQuestion().getQuestionId());
+        }
+
         return answerDao.saveAll(answers);
     }
 
@@ -137,5 +145,9 @@ public class JobListingService {
 
     public Optional<List<Listing>> getListingsByDatePostedAfter(Integer daysAgo) {
         return listingDao.findByDatePostedAfter(Instant.now().minus(daysAgo, ChronoUnit.DAYS));
+    }
+
+    public Optional<Question> findQuestionById(Integer questionId) {
+        return questionDao.findById(questionId);
     }
 }

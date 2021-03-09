@@ -1,6 +1,7 @@
 package com.talentpath.JobLister.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -51,7 +52,8 @@ public class Listing implements Serializable {
     @CreationTimestamp
     private Instant datePosted;
 
-    @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "listing", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Question> questions = new HashSet<>();
 
     @ManyToMany(mappedBy = "listings", fetch = FetchType.EAGER)

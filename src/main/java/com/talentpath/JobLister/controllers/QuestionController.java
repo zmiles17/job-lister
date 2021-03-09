@@ -1,8 +1,10 @@
 package com.talentpath.JobLister.controllers;
 
+import com.talentpath.JobLister.exceptions.ResourceNotFoundException;
 import com.talentpath.JobLister.models.Question;
 import com.talentpath.JobLister.services.JobListingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +27,13 @@ public class QuestionController {
             response = ResponseEntity.badRequest().body(e.getMessage());
         }
         return response;
+    }
+
+    @GetMapping("/{questionId}")
+    public ResponseEntity<Question> findQuestionById(@PathVariable Integer questionId)
+            throws ResourceNotFoundException {
+        return new ResponseEntity<>(service.findQuestionById(questionId).orElseThrow(),
+                HttpStatus.OK);
     }
 
     @GetMapping("/listing/{listingId}")

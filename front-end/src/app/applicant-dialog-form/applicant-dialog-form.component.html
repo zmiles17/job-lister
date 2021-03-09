@@ -1,0 +1,53 @@
+<form [formGroup]="applicationForm">
+    <h2 mat-dialog-title>{{data.listingName}} at {{data.company}} in {{data.city}}, {{data.state}}</h2>
+    <mat-dialog-content class="mat-typography">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Ex. Jane Doe" formControlName="applicantName" required>
+            <mat-icon matPrefix>person</mat-icon>
+            <mat-error *ngIf="applicationForm.controls['applicantName'].hasError('required')">
+                Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Ex. john@example.com" formControlName="email" required>
+            <mat-icon matPrefix>email</mat-icon>
+            <mat-error *ngIf="applicationForm.controls['email'].hasError('email')">
+                Format should be <strong>example@example.com</strong>
+            </mat-error>
+            <mat-error *ngIf="applicationForm.controls['email'].hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Phone number</mat-label>
+            <input matInput placeholder="Ex. (555) 555-1234" mask="(000) 000-0000" formControlName="phoneNumber"
+                required>
+            <mat-icon matPrefix>phone</mat-icon>
+            <mat-error *ngIf="applicationForm.controls['phoneNumber'].hasError('minLength')">
+                Phone number should be <strong>ten</strong> digits
+            </mat-error>
+            <mat-error *ngIf="applicationForm.controls['phoneNumber'].hasError('required')">
+                Phone number is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+       <p *ngFor="let answer of answers.controls; index as i" formArrayName="answers">
+        <mat-form-field class="answer">
+            <mat-label>{{data.questions[i].question}}</mat-label>
+            <input matInput placeholder="Answer" [formControlName]="i" required/>
+            <mat-icon matPrefix>question_answer</mat-icon>
+        </mat-form-field>
+    </p>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [disabled]="applicationForm.status === 'INVALID'" [mat-dialog-close]="applicationForm.value"
+            color="primary">Apply</button>
+    </mat-dialog-actions>
+</form>

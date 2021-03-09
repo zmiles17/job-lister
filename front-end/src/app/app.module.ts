@@ -29,10 +29,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { CreateListingDialogComponent } from './create-listing-dialog/create-listing-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
-import {MatMenuModule} from '@angular/material/menu';
-import { QuestionComponent } from './question/question.component';
+import { MatMenuModule } from '@angular/material/menu';
 import { UpdateListingDialogComponent } from './update-listing-dialog/update-listing-dialog.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ApplicantDialogFormComponent } from './applicant-dialog-form/applicant-dialog-form.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ApplicantViewComponent } from './applicant-view/applicant-view.component';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
@@ -47,9 +52,10 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     TextInputComponent,
     JobsTableComponent,
     CreateListingDialogComponent,
-    QuestionComponent,
     UpdateListingDialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ApplicantDialogFormComponent,
+    ApplicantViewComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +77,9 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     MatTableModule,
     MatToolbarModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatGridListModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [ListingsService],
   bootstrap: [AppComponent]

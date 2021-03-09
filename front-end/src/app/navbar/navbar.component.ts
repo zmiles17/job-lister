@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateListingDialogComponent } from '../create-listing-dialog/create-listing-dialog.component';
 import { Listing } from '../listing';
 import { ListingsService } from '../listings.service';
+import { Question } from '../question';
 
 @Component({
   selector: 'app-navbar',
@@ -23,6 +24,7 @@ export class NavbarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        result.questions = result.questions.map(question => new Question(question));
         this.service.addListing(result).subscribe(
           listing => this.listingAddedEventEmitter.emit(listing),
           error => console.log(error)
