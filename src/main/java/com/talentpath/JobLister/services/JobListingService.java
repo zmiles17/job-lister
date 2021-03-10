@@ -80,6 +80,7 @@ public class JobListingService {
         currentListing.setEmploymentType(listing.getEmploymentType());
         currentListing.setState(listing.getState());
         currentListing.setSalary(listing.getSalary());
+        currentListing.setQuestions(listing.getQuestions());
         return listingDao.save(currentListing);
     }
 

@@ -1,40 +1,47 @@
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8"
-    *ngIf="dataSource.data.length > 0">
-    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-        <td mat-cell *matCellDef="let element"> {{getProperty(column) === 'phoneNumber'
-            ? (element[getProperty(column)] | mask: '(000) 000-0000') : (element[getProperty(column)])}} </td>
-    </ng-container>
+<mat-dialog-content class="mat-typography">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8"
+        *ngIf="dataSource.data.length > 0">
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+            <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+            <td mat-cell *matCellDef="let element"> {{getProperty(column) === 'phoneNumber'
+                ? (element[getProperty(column)] | mask: '(000) 000-0000') : (element[getProperty(column)])}} </td>
+        </ng-container>
 
-    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-    <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-            <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                <div class="example-element-diagram">
-                    <div class="example-element-position"> {{element.applicantName}} </div>
-                    <div class="example-element-symbol"> {{element.phoneNumber | mask: '(000) 000-0000'}} </div>
-                    <div class="example-element-name"> {{element.email}} </div>
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                <div class="example-element-detail"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <div class="example-element-diagram">
+                        <div class="example-element-position"> {{element.applicantName}} </div>
+                        <div class="example-element-symbol"> {{element.phoneNumber | mask: '(000) 000-0000'}} </div>
+                        <div class="example-element-name"> {{element.email}} </div>
+                    </div>
+                    <div class="example-element-description">
+                        <section *ngFor="let question of questions; index as i">
+                            {{question.question}}
+                            <span class="example-element-description-attribution"> -- {{element.answers[i].answer}}
+                            </span>
+                        </section>
+                    </div>
                 </div>
-                <div class="example-element-description">
-                    <section *ngFor="let question of questions; index as i">
-                        {{question.question}}
-                        <span class="example-element-description-attribution"> -- {{element.answers[i].answer}} </span>
-                    </section>
-                </div>
-            </div>
-        </td>
-    </ng-container>
+            </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
-        [class.example-expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element">
-    </tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
 
-<h2 *ngIf="dataSource.data.length === 0" mat-dialog-title>No applicants found for this listing!
-    <p>
-        <mat-icon>mood_bad</mat-icon>
-    </p>
-</h2>
+    <h2 *ngIf="dataSource.data.length === 0" mat-dialog-title>No applicants found for this listing!
+        <p>
+            <mat-icon>mood_bad</mat-icon>
+        </p>
+    </h2>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

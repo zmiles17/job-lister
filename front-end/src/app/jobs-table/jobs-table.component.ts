@@ -10,6 +10,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { ApplicantDialogFormComponent } from '../applicant-dialog-form/applicant-dialog-form.component';
 import { AnswerService } from '../answer.service';
 import { ApplicantViewComponent } from '../applicant-view/applicant-view.component';
+import { Question } from '../question';
 
 
 @Component({
@@ -146,14 +147,17 @@ export class JobsTableComponent implements OnChanges {
       employmentType: listing.employmentType,
       salary: listing.salary,
       city: listing.city,
-      state: listing.state
+      state: listing.state,
+      questions: listing.questions
     };
 
     const dialogRef = this.dialog.open(UpdateListingDialogComponent, { data });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== '' && data !== result) {
+      if (result && data !== result) {
         result['listingId'] = listing.listingId;
+        result.questions = result.questions.map(q => new Question(q));
+        result.applicants = listing.applicants;
         this.listingService.updateListing(result).subscribe(
           updatedListing => {
             this.dataSource.data[rowIndex] = updatedListing;

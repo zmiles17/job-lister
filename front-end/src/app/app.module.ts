@@ -13,11 +13,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ListingComponent } from './listing/listing.component';
-import { ListingViewComponent } from './listing-view/listing-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SalarySliderComponent } from './salary-slider/salary-slider.component';
-import { TextInputComponent } from './text-input/text-input.component';
 import { ListingsService } from './listings.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -47,10 +44,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     SearchFormComponent,
     ListingFormComponent,
     NavbarComponent,
-    ListingComponent,
-    ListingViewComponent,
     SalarySliderComponent,
-    TextInputComponent,
     JobsTableComponent,
     CreateListingDialogComponent,
     UpdateListingDialogComponent,

@@ -94,11 +94,19 @@
 
         <p *ngFor="let question of questions.controls; index as i" formArrayName="questions">
             <mat-form-field appearance="outline">
+                <mat-label>Question</mat-label>
                 <mat-icon matPrefix>question_answer</mat-icon>
-                <input type="text" matInput placeholder="Question" [formControlName]="i"/>
-                <mat-hint>e.g. Why do you want to work for us?, Who is your
-                    role model?
+                <input type="text" matInput placeholder="Question" [formControlName]="i" required />
+                <button mat-button [disabled]="questions.controls.length === 1" (click)="deleteQuestion(i)" matSuffix
+                    mat-icon-button aria-label="Clear">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-hint>
+                    Question for your applicant's to answer
                 </mat-hint>
+                <mat-error *ngIf="question.hasError('required')">
+                    Question is <strong>required</strong>
+                </mat-error>
             </mat-form-field>
         </p>
         <button (click)="addQuestion()" mat-button>Add Question</button>

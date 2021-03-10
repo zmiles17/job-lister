@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnChanges } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppConstants } from '../constants';
-import { Question } from '../question';
 
 @Component({
   selector: 'app-create-listing-dialog',
   templateUrl: './create-listing-dialog.component.html',
   styleUrls: ['./create-listing-dialog.component.css']
 })
-export class CreateListingDialogComponent implements OnInit {
+export class CreateListingDialogComponent implements OnInit, OnChanges {
 
   employmentTypes: string[] = AppConstants.employmentTypes;
   states: string[] = AppConstants.states;
@@ -21,22 +20,30 @@ export class CreateListingDialogComponent implements OnInit {
     state: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
     employmentType: new FormControl('', Validators.required),
-    questions: new FormArray([])
+    questions: new FormArray([new FormControl('', Validators.required)])
   });
 
   get questions() {
     return this.form.get('questions') as FormArray;
   }
 
-  constructor() { 
+  constructor(private cd: ChangeDetectorRef) { 
      
   }
 
   ngOnInit(): void {
   }
 
+  ngOnChanges(): void {
+    this.cd.detectChanges();
+  }
+
   addQuestion() {
-    this.questions.push(new FormControl('', Validators.nullValidator));
+    this.questions.push(new FormControl('', Validators.required));
+  }
+
+  deleteQuestion(index: number) {
+    this.questions.removeAt(index);
   }
 
 }
