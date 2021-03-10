@@ -36,6 +36,7 @@ import { ApplicantDialogFormComponent } from './applicant-dialog-form/applicant-
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ApplicantViewComponent } from './applicant-view/applicant-view.component';
+import { GithubIconComponent } from './github-icon/github-icon.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -55,7 +56,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     UpdateListingDialogComponent,
     ConfirmationDialogComponent,
     ApplicantDialogFormComponent,
-    ApplicantViewComponent
+    ApplicantViewComponent,
+    GithubIconComponent
   ],
   imports: [
     BrowserModule,

@@ -56,6 +56,6 @@ public class Listing implements Serializable {
     @JsonManagedReference
     private Set<Question> questions = new HashSet<>();
 
-    @ManyToMany(mappedBy = "listings", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "listings", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Applicant> applicants = new HashSet<>();
 }

@@ -18,7 +18,7 @@ export class UpdateListingDialogComponent implements OnInit {
     listingName: new FormControl('', Validators.required),
     industry: new FormControl('', Validators.required),
     company: new FormControl('', Validators.required),
-    salary: new FormControl('', [Validators.required, Validators.min(0), Validators.max(200000)]),
+    salary: new FormControl('', [Validators.required, Validators.min(0), Validators.max(500000)]),
     state: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
     employmentType: new FormControl('', Validators.required)

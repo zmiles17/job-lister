@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { Listing } from '../listing';
 import { ListingsService } from '../listings.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -120,6 +120,7 @@ export class JobsTableComponent implements OnChanges {
   viewApplicants(listing: Listing) {
     this.dialog.open(ApplicantViewComponent, {
       data: {
+        questions: listing.questions,
         applicants: listing.applicants
       }
     })
