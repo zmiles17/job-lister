@@ -156,6 +156,11 @@ export class JobsTableComponent implements OnChanges {
     dialogRef.afterClosed().subscribe(result => {
       if (result && data !== result) {
         result['listingId'] = listing.listingId;
+        result.questions = result.questions.map(q => {
+          let question = new Question(q);
+          q.questionId ? question.questionId = q.questionId : null;
+          return question;
+        });
         this.listingService.updateListing(result).subscribe(
           updatedListing => {
             this.dataSource.data[rowIndex] = updatedListing;

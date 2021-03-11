@@ -100,7 +100,7 @@
             <mat-form-field appearance="outline">
                 <mat-label>Question</mat-label>
                 <mat-icon matPrefix>question_answer</mat-icon>
-                <input type="text" matInput placeholder="Question" [formControlName]="i" required />
+                <textarea type="text" matInput placeholder="Question" [formControlName]="i" required></textarea>
                 <button mat-button [disabled]="questions.controls.length === 1" (click)="deleteQuestion(i)" matSuffix
                     mat-icon-button aria-label="Clear">
                     <mat-icon>close</mat-icon>

@@ -22,12 +22,12 @@ export class UpdateListingDialogComponent implements OnInit {
     state: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
     employmentType: new FormControl('', Validators.required),
-    // questions: new FormArray([])
+    questions: new FormArray([])
   })
 
-  // get questions() {
-  //   return this.form.get('questions') as FormArray;
-  // }
+  get questions() {
+    return this.form.get('questions') as FormArray;
+  }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Listing) {
     this.form.get('listingName').setValue(data.listingName);
@@ -37,18 +37,18 @@ export class UpdateListingDialogComponent implements OnInit {
     this.form.get('city').setValue(data.city);
     this.form.get('state').setValue(data.state);
     this.form.get('employmentType').setValue(data.employmentType);
-    // data.questions.forEach(q => this.questions.push(new FormControl(q.question, Validators.required)))
+    data.questions.forEach(q => this.questions.push(new FormControl(q.question, Validators.required)))
    }
 
   ngOnInit(): void {
   }
 
-  // addQuestion() {
-  //   this.questions.push(new FormControl('', Validators.required))
-  // }
+  addQuestion() {
+    this.questions.push(new FormControl('', Validators.required))
+  }
 
-  // deleteQuestion(index: number) {
-  //   this.questions.removeAt(index);
-  // }
+  deleteQuestion(index: number) {
+    this.questions.removeAt(index);
+  }
 
 }

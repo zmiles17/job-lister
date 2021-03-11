@@ -39,7 +39,7 @@
        <p *ngFor="let answer of answers.controls; index as i" formArrayName="answers">
         <mat-form-field class="answer">
             <mat-label>{{data.questions[i].question}}</mat-label>
-            <input matInput placeholder="Answer" [formControlName]="i" required/>
+            <textarea matInput placeholder="Answer" [formControlName]="i" required></textarea>
             <mat-icon matSuffix>question_answer</mat-icon>
         </mat-form-field>
     </p>
