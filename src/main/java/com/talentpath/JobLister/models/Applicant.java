@@ -1,7 +1,6 @@
 package com.talentpath.JobLister.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,8 +37,10 @@ public class Applicant implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "applications",
-            joinColumns = @JoinColumn(name = "applicant_id"),
-            inverseJoinColumns = @JoinColumn(name = "listing_id"))
+            joinColumns = @JoinColumn(name = "fk_applicant_id",
+                    referencedColumnName = "applicant_id"),
+            inverseJoinColumns = @JoinColumn(name = "fk_listing_id",
+                    referencedColumnName = "listing_id"))
     private Set<Listing> listings = new HashSet<>();
 
     @OneToMany(mappedBy = "applicant", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)

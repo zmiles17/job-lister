@@ -13,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,11 +70,13 @@ public class JobListingService {
         return listingDao.findBySalaryBetween(low, high);
     }
 
+    @Transactional
     public Listing updateListing(Listing listing)
             throws ResourceNotFoundException, DataIntegrityViolationException {
         Listing currentListing = listingDao
                 .findById(listing.getListingId())
                 .orElseThrow(() -> new ResourceNotFoundException("Listing not found with listingId = " + listing.getListingId()));
+//        listing.getApplicants().forEach(applicant -> applicantDao.delete(applicant));
         currentListing.setListingName(listing.getListingName());
         currentListing.setCity(listing.getCity());
         currentListing.setCompany(listing.getCompany());
@@ -80,7 +84,8 @@ public class JobListingService {
         currentListing.setEmploymentType(listing.getEmploymentType());
         currentListing.setState(listing.getState());
         currentListing.setSalary(listing.getSalary());
-        currentListing.setQuestions(listing.getQuestions());
+//        currentListing.setQuestions(listing.getQuestions());
+//        currentListing.setApplicants(new HashSet<>());
         return listingDao.save(currentListing);
     }
 

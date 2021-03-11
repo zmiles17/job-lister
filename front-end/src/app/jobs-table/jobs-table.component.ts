@@ -73,8 +73,8 @@ export class JobsTableComponent implements OnChanges {
     }
   }
 
-  openApplication(listing: Listing) {
-    const data = {
+  openApplication(listing: Listing): void {
+    const data: Listing = {
       listingId: listing.listingId,
       listingName: listing.listingName,
       company: listing.company,
@@ -85,6 +85,7 @@ export class JobsTableComponent implements OnChanges {
       state: listing.state,
       questions: listing.questions
     }
+
     const dialogRef = this.dialog.open(ApplicantDialogFormComponent, { data });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -112,8 +113,6 @@ export class JobsTableComponent implements OnChanges {
             this.dataSource._updateChangeSubscription();
           }, error => console.log(error));
         });
-      } else {
-        console.log("Application cancelled");
       }
     });
   }
@@ -130,12 +129,13 @@ export class JobsTableComponent implements OnChanges {
   deleteListing(listing: Listing) {
     const rowIndex = this.dataSource.data.indexOf(listing);
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
-    dialogRef.afterClosed().subscribe(result => result ? this.listingService.deleteListing(listing.listingId).subscribe(
-      () => {
-        this.dataSource.data.splice(rowIndex, 1)
-        this.dataSource._updateChangeSubscription()
-      }
-    ) : console.log("User wasn't sure"))
+    dialogRef.afterClosed().subscribe(result => result ?
+      this.listingService.deleteListing(listing.listingId).subscribe(
+        () => {
+          this.dataSource.data.splice(rowIndex, 1)
+          this.dataSource._updateChangeSubscription()
+        }
+      ) : null)
   }
 
   updateListing(listing: Listing) {
@@ -156,8 +156,6 @@ export class JobsTableComponent implements OnChanges {
     dialogRef.afterClosed().subscribe(result => {
       if (result && data !== result) {
         result['listingId'] = listing.listingId;
-        result.questions = result.questions.map(q => new Question(q));
-        result.applicants = listing.applicants;
         this.listingService.updateListing(result).subscribe(
           updatedListing => {
             this.dataSource.data[rowIndex] = updatedListing;
@@ -165,8 +163,6 @@ export class JobsTableComponent implements OnChanges {
           },
           error => console.log(error)
         )
-      } else {
-        console.log('Update did not occur');
       }
     });
   }

@@ -7,7 +7,7 @@ import { AppConstants } from '../constants';
   templateUrl: './create-listing-dialog.component.html',
   styleUrls: ['./create-listing-dialog.component.css']
 })
-export class CreateListingDialogComponent implements OnInit, OnChanges {
+export class CreateListingDialogComponent implements OnChanges {
 
   employmentTypes: string[] = AppConstants.employmentTypes;
   states: string[] = AppConstants.states;
@@ -27,23 +27,17 @@ export class CreateListingDialogComponent implements OnInit, OnChanges {
     return this.form.get('questions') as FormArray;
   }
 
-  constructor(private cd: ChangeDetectorRef) { 
-     
-  }
-
-  ngOnInit(): void {
-  }
+  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnChanges(): void {
     this.cd.detectChanges();
   }
 
-  addQuestion() {
+  addQuestion(): void {
     this.questions.push(new FormControl('', Validators.required));
   }
 
-  deleteQuestion(index: number) {
+  deleteQuestion(index: number): void {
     this.questions.removeAt(index);
   }
-
 }
