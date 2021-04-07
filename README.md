@@ -1,3 +1,3 @@
 # Screenshot
-<img src="https://imgur.com/jNrEMpP">
+![Image](https://imgur.com/jNrEMpP.jpg)
 
